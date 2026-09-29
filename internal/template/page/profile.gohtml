@@ -1,0 +1,21 @@
+{{ define "title" }}Profile{{ end }}
+
+{{ define "content" }}
+<article>
+	<header>{{ .Data.FullName }}</header>
+	<ul>
+		<li><span style="text-transform: capitalize;">{{ .Data.Gender }}</span>/{{ .Data.Age }}</li>
+		<li>Registeration Date : {{ .Data.CreatedAt.Format "02 January 2006" }}</li>
+		<li>Last Login : {{ .Data.LastLoginAt.Format "02 January 2006" }}</li>
+	</ul>
+	<footer>
+		{{ range .Data.Roles }}
+			{{ if eq .String "therapist" }}
+				<a href="/patients" role="button">View All Patients</a>
+			{{ else if eq .String "patient" }}
+				<a href="" role="button">View All Prescriptions</a>
+			{{ end }}
+		{{ end }}
+	</footer>
+</article>
+{{ end }}

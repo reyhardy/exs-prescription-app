@@ -1,0 +1,26 @@
+{{ define "title" }}List of Patients{{ end }}
+
+{{ define "content" }}
+<table>
+	<thead>
+		<tr>
+			<th scope="col">Patient's Name</th>
+			<th scope="col">Gender/Age</th>
+			<th scope="col">Diagnosis</th>
+			<th scope="col">Action</th>
+		</tr>
+	</thead>
+	<tbody>
+		{{ range .Data }}
+			<tr>
+				<th scope="row">{{ .FullName }}</th>
+				<td><span style="text-transform: capitalize;">{{ .Gender }}</span>/{{ .Age }}</td>
+				<td>{{ .Diagnosis }}</td>
+				<td><a href="/patients/{{ .Id }}" role="button">View</a></td>
+			</tr>
+		{{ else }}
+			<p>No patients referred yet</p>
+		{{ end }}
+	</tbody>
+</table>
+{{ end }}

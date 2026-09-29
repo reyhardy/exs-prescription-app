@@ -1,0 +1,30 @@
+{{ define "navbar" }}
+
+<header class="container">
+	<nav id="navbar">
+		<ul>
+			<li><strong>Exs Prescriptor</strong></li>
+		</ul>
+		{{ with .User }}
+			<ul>
+				{{ if gt (len .Roles) 1 }}
+					<li>
+						<details class="dropdown">
+							<summary style="background: none; border: none; color: var(--pico-primary); padding: 0; cursor: pointer; display: inline;">Roles</summary>
+							<ul>
+								<li><a href="">Therapist</a></li>
+								<li><a href="">Patient</a></li>
+							</ul>
+						</details>
+					</li>
+				{{ end }}
+				<li>
+					<form action="/logout" method="POST" nm-data nm-ref="logout">
+						<a href="#" nm-bind="'onclick.prevent': () => $refs.logout.submit()">Logout</a>
+					</form>
+				</li>
+			</ul>
+		{{ end }}
+	</nav>
+</header>
+{{ end }}

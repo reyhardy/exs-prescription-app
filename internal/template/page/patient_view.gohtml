@@ -1,0 +1,43 @@
+{{ define "title" }}Patient's Profile{{ end }}
+
+{{ define "content" }}
+<article>
+	<header>Patient's Name : {{ .Data.FullName }}</header>
+	<ul>
+		<li>Age : {{ .Data.Age }}</li>
+		<li>Diagnosis : {{ .Data.Diagnosis }}</li>
+		<ul>
+			{{ range .Data.Complaints }}
+				<li>{{ .Description }}</li>
+			{{ end }}
+		</ul>
+	</ul>
+	<div nm-data>
+		<dialog nm-ref="dialog">
+			{{ template "complaints-modal" .Data }}
+		</dialog>
+		<footer>
+			<a href="#" onclick="event.preventDefault()" role="button">
+				Set Appointment
+			</a>
+			<a nm-bind="onclick: () => $refs.dialog.showModal()" role="button" class="secondary">
+				View Prescriptions
+			</a>
+		</footer>
+	</div>
+</article>
+{{ end }}
+
+{{ define "complaints-modal" }}
+<article>
+	<header>
+		<button aria-label="Close" rel="prev" nm-bind="onclick: () => $refs.dialog.close()"></button>
+		<h1>Patient's Complaints</h1>
+	</header>
+	<ul>
+		{{ range .Complaints }}
+			<li><a href="#" onclick="event.preventDefault()">{{ .Description }}</a></li>
+		{{ end }}
+	</ul>
+</article>
+{{ end }}
